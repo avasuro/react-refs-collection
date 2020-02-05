@@ -1,7 +1,4 @@
-<div align="center">  
-  <a href="https://github.com/avasuro/react-refs-collection">  
-     <p>REACT-REFS-COLLECTION</p>
-  </a>
+<div align="center">
   <p>  
     Zero-dependencies library for <a href="https://reactjs.org/">React</a>
     to store and access multiple references to child components.
@@ -12,11 +9,6 @@
   <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/min/react-refs-collection">
   <img alt="GitHub" src="https://img.shields.io/github/license/avasuro/react-refs-collection">
 </div>
-
-## About
-
-This library helps to manage references to multiple child components.
-
 
 ## Install
 ```
@@ -93,7 +85,7 @@ When user filled search input and submitted it -
 we have to scroll list of items to first item that matches
 given search criteria and focus this item.
 
-Here is an implementation:
+Here is an implementation ([Live Demo](https://codesandbox.io/s/floral-tdd-jw89k)):
 
 ```JSX
 import {useRefsCollection} from 'react-refs-collection';
