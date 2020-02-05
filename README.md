@@ -175,13 +175,13 @@ Library exports two functions:
 
 RefsCollection object provides the following methods:
 
-| method             | description                                                                                                                                      |   |   |   |
-|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|---|---|---|
-| clear()            | clear all stored references                                                                                                                      |   |   |   |
-| getRefHandler(key) | returns value that should be passed to "ref" property of some react component to store reference to this component in collection under given key |   |   |   |
-| getRef(key)        | Returns reference by it's key                                                                                                                    |   |   |   |
-| getKeysByRef(ref)  | Returns array of all keys that relates to given reference object (or empty array if there is no keys assigned to given reference object)         |   |   |   |
-| getKeyByRef(ref)   | Same as *getKeysByRef*, but returns only first found key or undefined if there is no key found.    
+| method             | description                                                                                                                                      |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| clear()            | clear all stored references                                                                                                                      |
+| getRefHandler(key) | returns value that should be passed to "ref" property of some react component to store reference to this component in collection under given key |
+| getRef(key)        | Returns reference by it's key                                                                                                                    |
+| getKeysByRef(ref)  | Returns array of all keys that relates to given reference object (or empty array if there is no keys assigned to given reference object)         |
+| getKeyByRef(ref)   | Same as *getKeysByRef*, but returns only first found key or undefined if there is no key found.                                                  |
     
 ## License  
   
