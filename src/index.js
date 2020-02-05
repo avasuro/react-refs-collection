@@ -13,7 +13,7 @@ function getOrCreateMetadataByKey(collection, key) {
         const metadata = {
             current: undefined,
             refHandler(node) {
-                if (!node) {
+                if (node === undefined || node === null) {
                     collection.delete(key);
                 }
                 else {
@@ -29,6 +29,48 @@ function getOrCreateMetadataByKey(collection, key) {
 }
 
 /**
+ * Returns metadata by key
+ * @param {Map} collection
+ * @param {*} key
+ * @returns {*}
+ */
+function getRefByKey(collection, key) {
+    return collection.has(key) ? collection.get(key).current : undefined;
+}
+
+/**
+ * Returns key(s) that matches given value
+ * @param {Map} collection
+ * @param {*} valueToSearch
+ * @returns {Array<*>}
+ */
+function getKeysByRef(collection, valueToSearch) {
+    const keys = [];
+    collection.forEach((value, key) => {
+        if (value === valueToSearch) {
+            keys.push(key);
+        }
+    });
+    return keys;
+}
+
+/**
+ * Returns single key that matches given value
+ * @param {Map} collection
+ * @param {*} valueToSearch
+ * @returns {*|undefined} - return undefined
+ */
+function getKeyByRef(collection, valueToSearch) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [key, value] of collection) {
+        if (value === valueToSearch) {
+            return key;
+        }
+    }
+    return undefined;
+}
+
+/**
  * Refs collection
  * @class
  * @constructor
@@ -38,7 +80,9 @@ function RefsCollection() {
     return {
         clear: collection.clear.bind(collection),
         getRefHandler: key => getOrCreateMetadataByKey(collection, key).refHandler,
-        getCurrentRef: key => getOrCreateMetadataByKey(collection, key).current
+        getRef: key => getRefByKey(collection, key),
+        getKeysByRef: ref => getKeysByRef(collection, ref),
+        getKeyByRef: ref => getKeyByRef(collection, ref)
     };
 }
 
@@ -50,18 +94,13 @@ function RefsCollection() {
 function useRefsCollection() {
     const refsCollection = useRef();
     if (!refsCollection.current) {
-        // Map should be a mapping object from some key to object with the following structure:
-        // {
-        //     refHandler: function,
-        //     current: node
-        // }
         refsCollection.current = new RefsCollection();
     }
 
     // Clear refs collection on component destroy:
     useEffect(() => () => refsCollection.current.clear(), []);
 
-    return [refsCollection.current.getRefHandler, refsCollection.current.getCurrentRef];
+    return refsCollection.current;
 }
 
 export {

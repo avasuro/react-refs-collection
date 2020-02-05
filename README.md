@@ -24,17 +24,17 @@ import {useRefsCollection} from 'react-refs-collection';
 // Some functional component that renders multiple children and
 // should be able to call imperative handlers on them:
 const ItemsList = ({items}) => {
-   const [getItemRefHandler, getItemRef] = useRefsCollection();
+   const {getRefHandler, getRef} = useRefsCollection();
 
    const doSomeActionOnItem = useCallback(itemId => {
-       getItemRef(itemId).doSomeAction();
+       getRef(itemId).doSomeAction();
    }, []);
 
    return (
         <div>
             {items.map(({id, ...restProps}) => (
                 <Item
-                    ref={getItemRefHandler(id)}
+                    ref={getRefHandler(id)}
                     {...restProps}
                 />
             ))}
@@ -57,7 +57,11 @@ class ItemsList extends React.Component {
     }
 
     doSomeActionOnItem(itemId) {
-        this._refsCollection.getItemRef(itemId).doSomeAction();
+        this._refsCollection.getRef(itemId).doSomeAction();
+    }
+
+    componentWillUnmount() {
+        this._refsCollection.clear();
     }
 
     render() {
@@ -65,7 +69,7 @@ class ItemsList extends React.Component {
             <div>
                 {this.props.items.map(({id, ...restProps}) => (
                     <Item
-                        ref={this._refsCollection.getItemRefHandler(id)}
+                        ref={this._refsCollection.getRefHandler(id)}
                         {...restProps}
                     />
                 ))}
@@ -91,7 +95,7 @@ Here is an implementation ([Live Demo](https://codesandbox.io/s/floral-tdd-jw89k
 import {useRefsCollection} from 'react-refs-collection';
 
 const MyComponent = (items) => {
-  const [getItemRefHandler, getItemRef] = useRefsCollection();
+  const {getRefHandler, getRef} = useRefsCollection();
   
   const [searchValue, setSearchValue] = useState("");
 
@@ -104,11 +108,11 @@ const MyComponent = (items) => {
       item.value.toLowerCase().startsWith(searchValue.toLowerCase())
     );
     if (!match) return;
-    const itemNode = getItemRef(match.id);
+    const itemNode = getRef(match.id);
     if (itemNode) {
       itemNode.focus();
     }
-  }, [getItemRef, searchValue]);
+  }, [getRef, searchValue]);
 
   // Search value when user pressed "Enter":
   const onInputKeyUp = useCallback(
@@ -136,7 +140,7 @@ const MyComponent = (items) => {
           <div
             key={item.id}
             className="focusable"
-            ref={getItemRefHandler(item.id)}
+            ref={getRefHandler(item.id)}
             tabIndex={-1}
           >
             {item.value}
@@ -162,6 +166,23 @@ const items = [
 ReactDOM.render(<MyComponent items={items} />, document.getElementById('app'));
 ```
 
+## API
+
+Library exports two functions:
+
+- RefsCollection - constructor-like function, that returns RefsCollection object with all needed mothods (can be invoked with or without "new" statement)
+- useRefsCollection - react hook, that creates and returns RefsCollection object
+
+RefsCollection object provides the following methods:
+
+| method             | description                                                                                                                                      |   |   |   |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|---|---|---|
+| clear()            | clear all stored references                                                                                                                      |   |   |   |
+| getRefHandler(key) | returns value that should be passed to "ref" property of some react component to store reference to this component in collection under given key |   |   |   |
+| getRef(key)        | Returns reference by it's key                                                                                                                    |   |   |   |
+| getKeysByRef(ref)  | Returns array of all keys that relates to given reference object (or empty array if there is no keys assigned to given reference object)         |   |   |   |
+| getKeyByRef(ref)   | Same as *getKeysByRef*, but returns only first found key or undefined if there is no key found.    
+    
 ## License  
   
   [MIT](LICENSE)
