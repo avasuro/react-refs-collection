@@ -46,8 +46,8 @@ function getRefByKey(collection, key) {
  */
 function getKeysByRef(collection, valueToSearch) {
     const keys = [];
-    collection.forEach((value, key) => {
-        if (value === valueToSearch) {
+    collection.forEach((metadata, key) => {
+        if (metadata.current === valueToSearch) {
             keys.push(key);
         }
     });
@@ -62,8 +62,8 @@ function getKeysByRef(collection, valueToSearch) {
  */
 function getKeyByRef(collection, valueToSearch) {
     // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of collection) {
-        if (value === valueToSearch) {
+    for (const [key, metadata] of collection) {
+        if (metadata.current === valueToSearch) {
             return key;
         }
     }
