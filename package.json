@@ -1,6 +1,6 @@
 {
   "name": "react-refs-collection",
-  "version": "0.1.0-alpha.2",
+  "version": "1.0.0",
   "description": "React utility to store and access multiple references",
   "main": "./src/index.js",
   "engines": {
