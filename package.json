@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/avasuro/react-refs-collection"
+    "url": "git+https://github.com/avasuro/react-refs-collection.git"
   },
   "devDependencies": {
     "@commitlint/cli": "19.2.1",
