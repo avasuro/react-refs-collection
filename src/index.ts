@@ -2,7 +2,7 @@ import {useCallback, useState} from 'react';
 
 type MetatadaObj<T> = {
     current: T|null,
-    refHandler: (node: T) => void
+    refHandler: (node: T|null) => void
 };
 
 /**
@@ -23,7 +23,7 @@ function useRefsCollection<Value = any, Key = any>() {
         if (!collection.has(key)) {
             const metadata: MetatadaObj<Value> = {
                 current: null,
-                refHandler(node: Value|null) {
+                refHandler(node) {
                     if (node === undefined || node === null) {
                         collection.delete(key);
                     }
