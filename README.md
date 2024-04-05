@@ -19,7 +19,7 @@ npm install --save react-refs-collection
 
 ### In functional components:
 ```JSX
-import {useRefsCollection} from 'react-refs-collection';
+import useRefsCollection from 'react-refs-collection';
 
 // Some functional component that renders multiple children and
 // should be able to call imperative handlers on them:
@@ -43,42 +43,6 @@ const ItemsList = ({items}) => {
 }
 ```
 
-### In class components:
-
-```JSX
-import {RefsCollection} from 'react-refs-collection';
-
-// Some class component that renders multiple children and
-// should be able to call imperative handlers on them:
-class ItemsList extends React.Component {
-    constructor(props) {
-        super(props);
-        this._refsCollection = new RefsCollection();
-    }
-
-    doSomeActionOnItem(itemId) {
-        this._refsCollection.getRef(itemId).doSomeAction();
-    }
-
-    componentWillUnmount() {
-        this._refsCollection.clear();
-    }
-
-    render() {
-        return (
-            <div>
-                {this.props.items.map(({id, ...restProps}) => (
-                    <Item
-                        ref={this._refsCollection.getRefHandler(id)}
-                        {...restProps}
-                    />
-                ))}
-            </div>
-        )
-    }
-}
-```
-
 ## Example of usage
 
 For example we have the following UI:
@@ -92,7 +56,7 @@ given search criteria and focus this item.
 Here is an implementation ([Live Demo](https://codesandbox.io/s/floral-tdd-jw89k)):
 
 ```JSX
-import {useRefsCollection} from 'react-refs-collection';
+import useRefsCollection from 'react-refs-collection';
 
 const MyComponent = (items) => {
   const {getRefHandler, getRef} = useRefsCollection();
@@ -168,16 +132,10 @@ ReactDOM.render(<MyComponent items={items} />, document.getElementById('app'));
 
 ## API
 
-Library exports two functions:
-
-- RefsCollection - constructor-like function, that returns RefsCollection object with all needed mothods (can be invoked with or without "new" statement)
-- useRefsCollection - react hook, that creates and returns RefsCollection object
-
-RefsCollection object provides the following methods:
+`useRefsCollection` hook returns the following:
 
 | method             | description                                                                                                                                      |
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| clear()            | clear all stored references                                                                                                                      |
 | getRefHandler(key) | returns value that should be passed to "ref" property of some react component to store reference to this component in collection under given key |
 | getRef(key)        | Returns reference by it's key                                                                                                                    |
 | getKeysByRef(ref)  | Returns array of all keys that relates to given reference object (or empty array if there is no keys assigned to given reference object)         |
