@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-alpha.0](https://github.com/avasuro/react-refs-collection/compare/v1.0.0...v2.0.0-alpha.0) (2024-04-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* dropped support for RefsCollection class
+
+### Features
+
+* added React 18 support, dropped class-components support ([d26f85b](https://github.com/avasuro/react-refs-collection/commit/d26f85b329bc553a396abd25f932641e799c60e9))
+
 ## 1.0.0 (2021-12-13)
 
 
