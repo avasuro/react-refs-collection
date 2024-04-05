@@ -7,7 +7,7 @@
     "release": "HUSKY=0 standard-version",
     "lint": "eslint .",
     "prepare": "husky",
-    "publish:npm": "rm -rf ./dist && tsc"
+    "prepublish": "rm -rf ./dist && tsc"
   },
   "repository": {
     "type": "git",
