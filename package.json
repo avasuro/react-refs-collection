@@ -2,44 +2,39 @@
   "name": "react-refs-collection",
   "version": "1.0.0",
   "description": "React utility to store and access multiple references",
-  "main": "./src/index.js",
-  "engines": {
-    "node": ">=10"
-  },
+  "main": "./dist/index.js",
   "scripts": {
-    "release": "HUSKY_SKIP_HOOKS=1 standard-version",
-    "lint": "eslint ."
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+    "release": "HUSKY=0 standard-version",
+    "lint": "eslint .",
+    "prepare": "husky",
+    "publish:npm": "rm -rf ./dist && tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/avasuro/react-refs-collection"
   },
   "devDependencies": {
-    "@commitlint/cli": "8.3.5",
-    "@commitlint/config-conventional": "8.3.4",
-    "coveralls": "3.0.9",
-    "cz-conventional-changelog": "3.1.0",
-    "eslint": "8.4.1",
-    "eslint-config-airbnb": "19.0.2",
-    "eslint-config-avasuro": "3.1.0",
-    "eslint-plugin-import": "2.25.3",
-    "eslint-plugin-react": "7.27.1",
-    "eslint-plugin-react-hooks": "4.3.0",
-    "husky": "4.2.1",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "standard-version": "9.3.2"
+    "@commitlint/cli": "19.2.1",
+    "@commitlint/config-conventional": "19.1.0",
+    "@types/react": "18.2.74",
+    "@typescript-eslint/eslint-plugin": "7.5.0",
+    "@typescript-eslint/parser": "7.5.0",
+    "coveralls": "3.1.1",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-avasuro": "4.0.0",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-react": "7.34.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "9.0.11",
+    "react": "18.2.0",
+    "standard-version": "9.5.0",
+    "typescript": "5.4.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": ">=16.8.0"
   },
   "config": {
     "commitizen": {
