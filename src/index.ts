@@ -25,10 +25,13 @@ function useRefsCollection<Value = any, Key = any>() {
                 current: null,
                 refHandler(node) {
                     if (node === undefined || node === null) {
-                        collection.delete(key);
+                        if (collection.get(key) === metadata) {
+                            collection.delete(key);
+                        }
                     }
                     else {
                         metadata.current = node;
+                        collection.set(key, metadata);
                     }
                 }
             };
