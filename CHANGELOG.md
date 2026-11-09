@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/avasuro/react-refs-collection/compare/v2.0.0...v2.0.1) (2026-11-09)
+
+
+### Bug Fixes
+
+* keep refs registered across React 19 StrictMode ref double invocation ([ec1f1a4](https://github.com/avasuro/react-refs-collection/commit/ec1f1a40f738162efb7a12fc076e82ffdce240e0))
+
 ## [2.0.0](https://github.com/avasuro/react-refs-collection/compare/v2.0.0-alpha.2...v2.0.0) (2024-04-05)
 
 ## [2.0.0-alpha.2](https://github.com/avasuro/react-refs-collection/compare/v2.0.0-alpha.1...v2.0.0-alpha.2) (2024-04-05)
